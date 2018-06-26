@@ -1,0 +1,60 @@
+<div id="setupDiv"><label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"/>
+    <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100" value="0" step="1">
+    <button id="playButton" class="btn"><i class="fas fa-play"></i></button>
+    <button id="stopButton" class="btn"><i class="fas fa-stop"></i></button>
+    <button id="saveButton" class="btn"><i class="fas fa-save"></i></button>
+    <button id="deleteButton" class="btn"><i class="fas fa-trash-alt"></i></button>
+</div>
+<div>
+    <div>
+        <div class="noteDiv">
+        </div>
+        <button class="noteBtn 1"></button>
+        <button class="noteBtn 2"></button>
+        <button class="noteBtn 3"></button>
+        <button class="noteBtn 4"></button>
+        <button class="noteBtn 5"></button>
+        <button class="noteBtn 6"></button>
+        <button class="noteBtn 7"></button>
+        <button class="noteBtn 8"></button>
+        <button class="noteBtn 9"></button>
+        <button class="noteBtn 10"></button>
+        <button class="noteBtn 11"></button>
+        <button class="noteBtn 12"></button>
+        <button class="noteBtn 13"></button>
+        <button class="noteBtn 14"></button>
+        <button class="noteBtn 15"></button>
+        <button class="noteBtn 16"></button>
+    </div>
+</div>
+<% var i = 0; console.log(i);%>
+<% _.each(bars, function(bar) { %>
+<div id="<%= i%>">
+    <div class="barSetupDiv">
+        <div class="soundFilterDiv">
+            <label for="barOneSoundSelect">Sound:</label>
+            <select size="1" id="barOneSoundSelect">
+                <option value="kick1">kick1</option>
+                <option value="kick2">kick2</option>
+                <option value="kick3">kick3</option>
+            </select>
+            <label for="barOneFilterSelect">Filter:</label>
+            <select size="1" id="barOneFilterSelect">
+                <option value="filter1">filter1</option>
+                <option value="filter2">filter2</option>
+                <option value="filter3">filter3</option>
+            </select>
+        </div>
+        <div class="volumeDiv">
+            <label for="<%= 'volume' + i %>">Lautstärke </label>
+            <input class="barVolume" id="<%= 'volume' + i %>" type="range" min="0" max="100" value="100" step="1">
+        </div>
+    </div>
+    <% var j = 1; console.log(j);%>
+    <% _.each(bar.notes, function(note) { %>
+    <button class="beatBtn <%= j %>" value="<%= note ? 'set' : 'unset' %>"></button>
+    <% j++; %>
+    <% }); %>
+</div>
+<% i++; %>
+<% }); %>

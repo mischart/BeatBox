@@ -1,0 +1,81 @@
+/*Gängige Auflösungen in px:
+Smartphone - 320x480
+                Tablet, klein - 800x600
+                                   Tablet, groß oder Notebook, klein - 1024x768
+                                                                           Notebook 16:9 - 1280x800
+
+
+         */
+/*html {*/
+/*text-align: center;*/
+/*}*/
+
+body {
+    width: 1000px;
+    height: 700px;
+    margin: auto;
+    border: 3px solid #73AD21;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    display: inline-block;
+    opacity: 1;
+}
+
+input[type=number] {
+    display: inline-block;
+}
+
+input[type=range] {
+    display: inline-block;
+    width: 100px;
+}
+
+.beatBtn {
+    /*display: inline-block;*/
+
+}
+
+#barOneDiv, #setupDiv {
+    width: 990px;
+    border: 3px solid #73AD21;
+}
+
+.barSetupDiv, .noteDiv {
+    width: 250px;
+    border: 3px solid #73AD21;
+    display: inline-block;
+}
+
+.noteDiv {
+    height: 30px;
+    border: 3px solid white;
+}
+
+.soundFilterDiv, .volumeDiv {
+    display: inline-block;
+}
+
+.beatBtn {
+    width: 40px;
+    height: 40px;
+}
+
+.noteBtn {
+    width: 40px;
+    height: 20px;
+    background-color: black;
+}
+
+.noteBtn[value="played"] {
+    background-color: purple;
+}
+
+button[value="set"] {
+    background-color: #4CAF50;
+}
+
+button[value="unset"] {
+    background-color: #e7e7e7;
+}
