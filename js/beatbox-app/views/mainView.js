@@ -1,3 +1,10 @@
+/**
+ * mainView zur Darstellung der BeatBox Maschine
+ *
+ * @module mainView.js
+ */
+
+
 define([
     'jquery',
     'underscore',
@@ -11,8 +18,8 @@ define([
         el: $('#beatbox-app'),
         initialize: function (options) {
             this.options = options;
-            this.beatBoxController = null;
-            var beats = new Beats();
+            this.beatBoxController = null;   // beatBoxController zum Verwalten des aktuellen Beats
+            var beats = new Beats(); // Collections, d.h. gespeicherte Beats des Users
             var _this = this;
 
 
@@ -26,6 +33,7 @@ define([
 
             return this;
         },
+        //  Event Handler setzen
         events: {
             'click #playButton': 'play',
             'click #stopButton': 'stop',
@@ -35,6 +43,8 @@ define([
             'input .barVolume': 'changeBarVolume'
 
         },
+
+        // Funktion zum Rendern der mainView
         render: function () {
             var compiledTemplate = _.template(template);      //template is the loaded HTML template
             var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
@@ -42,24 +52,28 @@ define([
             return this;
         },
 
+        //  Funktion zur Trennung von Event Listenern
         kill: function () {
             this.stopListening();
             this.undelegateEvents();
         },
 
-
+        // Event Handler zum Abspielen des Beats
         play: function () {
             this.beatBoxController.playBeat();
         },
 
+        // Event Handler zum Stoppen des Abspielens
         stop: function () {
             this.beatBoxController.stopPlaying();
         },
 
+        // Event Handler zum Abspeichern des Beats
         save: function () {
             this.beatBoxController.saveBeat();
         },
 
+        // Event Handler zum Löschen des Beats
         delete: function () {
             this.stop();
             var _this = this;
@@ -72,11 +86,15 @@ define([
 
         },
 
-
+        // Event Handler zum Setzen oder Enfernen einer Sechzehntelnote
         onBeatButtonClick: function (e) {
+            // angeklickter Button, der eine Sechzehntelnote repräsentiert
             var beatBtn = e.target;
+            // Takt, zu dem die angeklickte Sechzehntelnote gehört
             var barNumber = beatBtn.parentNode.id;
+            // Nummer der angeklickten Sechzehntelnote (von 1 bis 16)
             var noteNumber = this.getNoteNumber(beatBtn.classList);
+            // Prüfen, ob die Sechzehntelnote gesetzt oder entfernt werden soll
             var set = this.beatBoxController.toggleNote(barNumber, noteNumber);
             if (set) {
                 beatBtn.value = "set";
@@ -85,6 +103,7 @@ define([
             }
         },
 
+        // Event Handler zum Ändern der Lautstärke eines Takts
         changeBarVolume: function (e) {
             var volumeId = e.target.id;
             var barIndex = volumeId.replace('volume', '');
@@ -92,6 +111,7 @@ define([
             this.beatBoxController.changeVolume(barIndex, value);
         },
 
+        // Funktion, die die zugeordnete laufende Nummer einer Sechzehntelnote zurückgibt
         getNoteNumber: function (classLst) {
             if (classLst.contains("1")) {
                 return 1;
