@@ -80,6 +80,7 @@ define([
 
             this.setCurrentBeat();
             this.gainNodeController = new GainNodeController(this.currentBeat.get("bars").length);
+            this.initializeVolume();
 
             var _this = this;
             var bufferLoader = new BufferLoader(
@@ -143,9 +144,7 @@ define([
             this.currentBeat.get("bars").forEach(function (bar) {
                 if (bar.notes[_this.current16thNote]) {
                     notesToPlay[i] = ({
-                        sound: _this.soundBufferArray[bar.sound],
-                        // sound: bar.sound,
-                        volume: bar.volume / 100
+                        sound: _this.soundBufferArray[bar.sound]
                     });
                     // _this.playSound(bar.sound);
                     playing = true;
@@ -194,9 +193,27 @@ define([
         };
 
         // Funktion zum Ändern der Lautstärke des Takts mit der Nummer barIndex auf den neuen Wert volumeValue
-        this.changeVolume = function (barIndex, volumeValue) {
-            this.currentBeat.get("bars").volume = volumeValue;
-            this.gainNodeController.adjustVolume(barIndex, volumeValue / 100);
+        this.changeVolumeOfBar = function (barIndex, volumeValue) {
+            this.currentBeat.get("bars")[barIndex].volume = volumeValue;
+            this.gainNodeController.adjustBarVolume(barIndex, volumeValue / 100);
+        };
+
+        // Funktion zum Ändern der Lautstärke der gesamten BeatBox Maschine
+        this.changeVolume = function (volumeValue) {
+            this.currentBeat.set("volume", volumeValue);
+            this.gainNodeController.adjustMainVolume(volumeValue / 100);
+        };
+
+        // Funktion zur Initialisierung der Lautstärke der gesamten BeatBox Maschine
+        // sowie der einzelnen Takts
+        this.initializeVolume = function () {
+            var currentMainVolume = this.currentBeat.get("volume");
+            this.gainNodeController.adjustMainVolume(currentMainVolume / 100);
+            var bars = this.currentBeat.get("bars");
+            for (var i = 0; i < bars.length; i++) {
+                this.gainNodeController.adjustBarVolume(i, bars[i].volume / 100);
+            }
+
         };
 
         this.init();

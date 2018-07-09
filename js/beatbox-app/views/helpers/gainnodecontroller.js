@@ -47,7 +47,6 @@ define([
                 if (noteParameters[i] != null) {
                     this.soundSources[i] = (Utils.audioContext.createBufferSource());
                     this.soundSources[i].buffer = noteParameters[i].sound;
-                    this.volumeGainNodes[i].volume = noteParameters[i].volume;
                 }
             }
             this.connectSourceToAndPlay();
@@ -69,10 +68,16 @@ define([
             this.connectVolumeNodeGainTo();
         };
 
-
-        this.adjustVolume = function (barIndex, volumeValue) {
+        // Funktion zur Einstellung der Lautstärke des Takts mit der Nummer barIndex
+        this.adjustBarVolume = function (barIndex, volumeValue) {
             this.volumeGainNodes[barIndex].gain.value = volumeValue;
         };
+
+        // Funktion zur Einstellung der gesamten Lautstärke der BeatBox Maschine
+        this.adjustMainVolume = function (volumeValue) {
+            this.mainGainNode.gain.value = volumeValue;
+        };
+
         this.init(numberOfBars);
     }
 

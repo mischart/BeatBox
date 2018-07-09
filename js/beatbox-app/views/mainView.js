@@ -40,14 +40,16 @@ define([
             'click #saveButton': 'save',
             'click #deleteButton': 'delete',
             'click .beatBtn': 'onBeatButtonClick',
-            'input .barVolume': 'changeBarVolume'
+            'input .barVolume': 'changeBarVolume',
+            'input #volumeIn': 'changeMainVolume'
 
         },
 
         // Funktion zum Rendern der mainView
         render: function () {
             var compiledTemplate = _.template(template);      //template is the loaded HTML template
-            var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
+            //var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
+            var t = compiledTemplate({beat: this.beatBoxController.currentBeat});
             this.$el.html(t);
             return this;
         },
@@ -108,7 +110,12 @@ define([
             var volumeId = e.target.id;
             var barIndex = volumeId.replace('volume', '');
             var value = parseInt(e.target.value);
-            this.beatBoxController.changeVolume(barIndex, value);
+            this.beatBoxController.changeVolumeOfBar(barIndex, value);
+        },
+
+        changeMainVolume: function (e) {
+            var value = parseInt(e.target.value);
+            this.beatBoxController.changeVolume(value);
         },
 
         // Funktion, die die zugeordnete laufende Nummer einer Sechzehntelnote zurückgibt

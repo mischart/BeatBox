@@ -1,5 +1,7 @@
-<div id="setupDiv"><label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"/>
-    <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100" value="0" step="1">
+<div id="setupDiv">
+    <label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"/>
+    <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100"
+                                                    value="<%= beat.get('volume') %>" step="1">
     <button id="playButton" class="btn"><i class="fas fa-play"></i></button>
     <button id="stopButton" class="btn"><i class="fas fa-stop"></i></button>
     <button id="saveButton" class="btn"><i class="fas fa-save"></i></button>
@@ -28,7 +30,7 @@
     </div>
 </div>
 <% var i = 0; console.log(i);%>
-<% _.each(bars, function(bar) { %>
+<% _.each(beat.get('bars'), function(bar) { %>
 <div id="<%= i%>">
     <div class="barSetupDiv">
         <div class="soundFilterDiv">
@@ -47,7 +49,8 @@
         </div>
         <div class="volumeDiv">
             <label for="<%= 'volume' + i %>">Lautstärke </label>
-            <input class="barVolume" id="<%= 'volume' + i %>" type="range" min="0" max="100" value="100" step="1">
+            <input class="barVolume" id="<%= 'volume' + i %>" type="range" min="0" max="100" value="<%= bar.volume %>"
+                   step="1">
         </div>
     </div>
     <% var j = 1; console.log(j);%>
