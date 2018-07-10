@@ -41,7 +41,9 @@ define([
             'click #deleteButton': 'delete',
             'click .beatBtn': 'onBeatButtonClick',
             'input .barVolume': 'changeBarVolume',
-            'input #volumeIn': 'changeMainVolume'
+            'input #volumeIn': 'changeMainVolume',
+            'input #tempoIn': 'changeTempo'
+
 
         },
 
@@ -113,9 +115,18 @@ define([
             this.beatBoxController.changeVolumeOfBar(barIndex, value);
         },
 
+        // Event Handler zum Ändern der Lautstärke des gesamten Beats
         changeMainVolume: function (e) {
             var value = parseInt(e.target.value);
             this.beatBoxController.changeVolume(value);
+        },
+
+        // Eventhandler zum Ändern des Tempos
+        changeTempo: function (e) {
+            var value = parseInt(e.target.value);
+            if (value >= parseInt(e.target.min) && value <= parseInt(e.target.max)) {
+                this.beatBoxController.adjustTempo(value);
+            }
         },
 
         // Funktion, die die zugeordnete laufende Nummer einer Sechzehntelnote zurückgibt

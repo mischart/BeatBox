@@ -1,5 +1,6 @@
 <div id="setupDiv">
-    <label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"/>
+    <label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"
+                                                value="<%= beat.get('tempo') %>"/>
     <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100"
                                                     value="<%= beat.get('volume') %>" step="1">
     <button id="playButton" class="btn"><i class="fas fa-play"></i></button>

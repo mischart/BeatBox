@@ -9,6 +9,7 @@ define([
         localStorage: window.localStorageInstance,
         defaults: {
             name: "anonim",
+            tempo: 120,
             volume: 100,
             bars: createDefaultBarSet()
         }

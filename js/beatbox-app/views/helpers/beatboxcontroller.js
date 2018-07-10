@@ -22,8 +22,6 @@ define([
         this.startTime;
         // die aktuell abzuspielende Sechzehntelnote
         this.current16thNote;
-        // Tempo des Beats
-        this.tempo = 120.0;
         // Zeit in Millisekunden, nach deren Ablauf die Funktion scheduler() wiederholend ausgeführt wird
         this.lookahead = 25.0;
         // Pufferzeit, die in der Funktion scheduler() zur Prüfung,ob die nächste Sechzehntelnote
@@ -159,7 +157,7 @@ define([
 
         // Funktion zum Berechnen und Setzen des Zeitpunktes des Abspielens der nächsten Sechzehntelnote
         this.nextNote = function () {
-            var secondsPerBeat = 60.0 / this.tempo;
+            var secondsPerBeat = 60.0 / this.currentBeat.get("tempo");
             this.nextNoteTime += 0.25 * secondsPerBeat;
             this.current16thNote++;
             if (this.current16thNote == 16) {
@@ -214,6 +212,10 @@ define([
                 this.gainNodeController.adjustBarVolume(i, bars[i].volume / 100);
             }
 
+        };
+
+        this.adjustTempo = function (tempo) {
+            this.currentBeat.set("tempo", tempo);
         };
 
         this.init();
