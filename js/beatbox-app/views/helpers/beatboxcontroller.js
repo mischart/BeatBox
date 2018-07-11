@@ -84,8 +84,63 @@ define([
             var bufferLoader = new BufferLoader(
                 Utils.audioContext,
                 [
-                    'sounds/kick.wav',
-                    'sounds/snare.wav'
+                    //     This application uses these sounds below from freesound:
+
+
+                    // kick
+                    'sounds/kick/40604__pestilenza__kick-11.wav', // author / user http://freesound.org/people/pestilenza/
+                    'sounds/kick/42028__psycho-boomer__hard-kick1.wav', // author / user http://freesound.org/people/psycho-boomer/
+                    'sounds/kick/171104__dwsd__kick-gettinglaid.wav', // author / user http://freesound.org/people/dwsd/
+                    'sounds/kick/183097__dwsd__bd-doitlive.wav', // author / user http://freesound.org/people/dwsd/
+                    'sounds/kick/344761__waveplay__punchy-trance-kick-5.wav', // author / user http://freesound.org/people/waveplay/
+                    'sounds/kick/346968__giomilko__kick-001.wav', // author / user http://freesound.org/people/giomilko/
+                    'sounds/kick/368648__darealwollen__kick-01.wav', // author / user http://freesound.org/people/darealwollen/
+                    //snare
+                    'sounds/snare/100396__zgump__snare-04.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/snare/165208__rhythmpeople__rpeople-snare2.wav', // author / user http://freesound.org/people/rhythmpeople/
+                    'sounds/snare/212208__alexthegr81__tapesnare-15.wav', // author / user http://freesound.org/people/alexthegr81/
+                    'sounds/snare/270156__theriavirra__04c-snare-smooth-cymbals-snares.wav', // author / user http://freesound.org/people/theriavirra/
+                    'sounds/snare/387186__alexiero-1__ai-snare-20.wav', // author / user http://freesound.org/people/alexiero-1/
+                    'sounds/snare/410514__inspectorj__snare-drum-single-hit-a-h1.wav', // author / user http://freesound.org/people/inspectorj/
+                    // //hihat
+                    'sounds/hihat/55230__dolfeus__zome-7hithatstereo.wav', // author / user http://freesound.org/people/dolfeus/
+                    'sounds/hihat/57527__dolfeus__catbeat-hit.wav', // author / user http://freesound.org/people/dolfeus/
+                    'sounds/hihat/96140__zgump__zg-hat-01.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/hihat/269720__ianstargem__electronic-closed-high-hat-1.wav', // author / user http://freesound.org/people/ianstargem/
+                    'sounds/hihat/404889__gnuoctathorpe__hi-hat3.wav', // author / user http://freesound.org/people/gnuoctathorpe/
+                    'sounds/hihat/404890__gnuoctathorpe__hi-hat2.wav', // author / user http://freesound.org/people/gnuoctathorpe/
+                    // //bass
+                    'sounds/bass/11741__medialint__bassis-big-bass-c2.wav', // author / user http://freesound.org/people/medialint/
+                    'sounds/bass/75228__zgump__bass-0101.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/bass/89264__smokum__bass-a2.wav', // author / user http://freesound.org/people/smokum/
+                    'sounds/bass/89265__smokum__bass-a3.wav', // author / user http://freesound.org/people/smokum/
+                    'sounds/bass/115525__ongitak__bass-stab-11.wav', // author / user http://freesound.org/people/ongitak/
+                    'sounds/bass/209943__veiler__bass-16b.wav', // author / user http://freesound.org/people/veiler/
+                    'sounds/bass/8521__pitmusic__tb3-bass-02.wav', // author / user http://freesound.org/people/pitmusic/
+                    'sounds/bass/89263__smokum__bassdown-d3.wav', // author / user http://freesound.org/people/smokum/
+                    'sounds/bass/122422__anillogic__grungebass-a1.wav', // author / user http://freesound.org/people/anillogic/
+
+                    // //others
+                    'sounds/others/11741__medialint__bassis-big-bass-c2.wav', // author / user http://freesound.org/people/medialint/
+                    'sounds/others/26956__xinaesthete__bsoft2.wav', // author / user http://freesound.org/people/xinaesthete/
+                    'sounds/others/28469__simmfoc__blip-1.wav', // author / user http://freesound.org/people/simmfoc/
+                    'sounds/others/75228__zgump__bass-0101.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/others/89264__smokum__bass-a2.wav', // author / user http://freesound.org/people/smokum/
+                    'sounds/others/89265__smokum__bass-a3.wav', // author / user http://freesound.org/people/smokum/
+                    'sounds/others/103015__zgump__el-bass-01.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/others/103016__zgump__el-bass-02.wav', // author / user http://freesound.org/people/zgump/
+                    'sounds/others/115525__ongitak__bass-stab-11.wav', // author / user http://freesound.org/people/ongitak/
+                    'sounds/others/161841__antistatikk__balloon-bass-03.wav', // author / user http://freesound.org/people/antistatikk/
+                    'sounds/others/164699__deleted-user-2195044__sound5a.wav', // author / user https://freesound.org/people/deleted_user_2195044/
+                    'sounds/others/209943__veiler__bass-16b.wav', // author / user http://freesound.org/people/veiler/
+                    'sounds/others/249300__suntemple__access-denied.wav', // author / user http://freesound.org/people/suntemple/
+                    'sounds/others/253178__suntemple__retro-jump-sfx.wav', // author / user http://freesound.org/people/suntemple/
+                    'sounds/others/264512__dexus5__geiger1.wav', // author / user http://freesound.org/people/dexus5/
+                    'sounds/others/321104__nsstudios__blip2.wav', // author / user http://freesound.org/people/nsstudios/
+                    'sounds/others/385927__pol__s002-lap-complete-signal.wav', // author / user http://freesound.org/people/pol/
+                    'sounds/others/398088__gamezger__quack.wav', // author / user http://freesound.org/people/gamezger/
+                    'sounds/others/405546__raclure__loading-chime.wav', // author / user http://freesound.org/people/raclure/
+                    'sounds/others/414888__mattix__8bit-laser-shot-04.wav' // author / user http://freesound.org/people/mattix/
 
                 ], function (bufferList) {
                     //geladene Sounds abspeichern
@@ -213,6 +268,12 @@ define([
             }
 
         };
+
+        // Funktion zum Ändern des Sounds in einem Takt
+        this.changeBarSound = function (barIndex, soundIndex) {
+            var bars = this.currentBeat.get("bars");
+            bars[barIndex].sound = soundIndex;
+        },
 
         this.adjustTempo = function (tempo) {
             this.currentBeat.set("tempo", tempo);

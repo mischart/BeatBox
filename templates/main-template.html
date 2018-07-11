@@ -35,14 +35,71 @@
 <div id="<%= i%>">
     <div class="barSetupDiv">
         <div class="soundFilterDiv">
-            <label for="barOneSoundSelect">Sound:</label>
-            <select size="1" id="barOneSoundSelect">
-                <option value="kick1">kick1</option>
-                <option value="kick2">kick2</option>
-                <option value="kick3">kick3</option>
+            <label for="<%= 'sound' + i %>">Sound:</label>
+            <select size="1" class="soundSelect" id="<%= 'sound' + i %>">
+                <optgroup label="kick">
+                    <option value="0">kick1</option>
+                    <option value="1">kick2</option>
+                    <option value="2">kick3</option>
+                    <option value="3">kick4</option>
+                    <option value="4">kick5</option>
+                    <option value="5">kick6</option>
+                    <option value="6">kick7</option>
+                </optgroup>
+                <optgroup label="snare">
+                    <option value="7">snare1</option>
+                    <option value="8">snare2</option>
+                    <option value="9">snare3</option>
+                    <option value="10">snare4</option>
+                    <option value="11">snare5</option>
+                    <option value="12">snare6</option>
+                </optgroup>
+                <optgroup label="hithat">
+                    <option value="13">hihat1</option>
+                    <option value="14">hihat2</option>
+                    <option value="15">hihat3</option>
+                    <option value="16">hihat4</option>
+                    <option value="17">hihat5</option>
+                    <option value="18">hihat6</option>
+                </optgroup>
+                <optgroup label="bass">
+                    <option value="19">bass1</option>
+                    <option value="20">bass2</option>
+                    <option value="21">bass3</option>
+                    <option value="22">bass4</option>
+                    <option value="23">bass5</option>
+                    <option value="24">bass6</option>
+                    <option value="25">bass7</option>
+                    <option value="26">bass8</option>
+                    <option value="27">bass9</option>
+                </optgroup>
+                <optgroup label="others">
+                    <option value="28">big-bass-c2</option>
+                    <option value="29">bsoft2</option>
+                    <option value="30">blip-1</option>
+                    <option value="31">bass-0101</option>
+                    <option value="32">bass-a2</option>
+                    <option value="33">bass-a3</option>
+                    <option value="34">el-bass-01</option>
+                    <option value="35">el-bass-02</option>
+                    <option value="36">bass-stab-11</option>
+                    <option value="37">balloon-bass-03</option>
+                    <option value="38">sound5a</option>
+                    <option value="39">bass-16b</option>
+                    <option value="40">access-denied</option>
+                    <option value="41">retro-jump-sfx</option>
+                    <option value="42">geiger1</option>
+                    <option value="43">blip2</option>
+                    <option value="44">complete-signal</option>
+                    <option value="45">quack</option>
+                    <option value="46">loading-chime</option>
+                    <option value="47">laser-shot</option>
+                </optgroup>
+
+
             </select>
-            <label for="barOneFilterSelect">Filter:</label>
-            <select size="1" id="barOneFilterSelect">
+            <label for="<%= 'filter' + i %>">Filter:</label>
+            <select size="1" class="filterSelect" id="<%= 'filter' + i %>">
                 <option value="filter1">filter1</option>
                 <option value="filter2">filter2</option>
                 <option value="filter3">filter3</option>

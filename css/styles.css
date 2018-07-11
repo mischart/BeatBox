@@ -1,14 +1,10 @@
 /*Gängige Auflösungen in px:
 Smartphone - 320x480
-                Tablet, klein - 800x600
-                                   Tablet, groß oder Notebook, klein - 1024x768
-                                                                           Notebook 16:9 - 1280x800
+Tablet, klein - 800x600
+Tablet, groß oder Notebook, klein - 1024x768
+Notebook 16:9 - 1280x800
+ */
 
-
-         */
-/*html {*/
-/*text-align: center;*/
-/*}*/
 
 body {
     width: 1000px;

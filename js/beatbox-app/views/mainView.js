@@ -42,7 +42,8 @@ define([
             'click .beatBtn': 'onBeatButtonClick',
             'input .barVolume': 'changeBarVolume',
             'input #volumeIn': 'changeMainVolume',
-            'input #tempoIn': 'changeTempo'
+            'input #tempoIn': 'changeTempo',
+            'change .soundSelect': 'changeSound'
 
 
         },
@@ -127,6 +128,15 @@ define([
             if (value >= parseInt(e.target.min) && value <= parseInt(e.target.max)) {
                 this.beatBoxController.adjustTempo(value);
             }
+        },
+
+        // Eventhandler zum Ändern des Sounds in einem Takt
+        changeSound: function (e) {
+            var soundSelectId = e.target.id;
+            var barIndex = soundSelectId.replace('sound', '');
+            var soundIndex = e.target.options[e.target.selectedIndex].value;
+            this.beatBoxController.changeBarSound(barIndex, soundIndex);
+
         },
 
         // Funktion, die die zugeordnete laufende Nummer einer Sechzehntelnote zurückgibt
