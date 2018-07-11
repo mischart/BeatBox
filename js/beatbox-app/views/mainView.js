@@ -54,6 +54,7 @@ define([
             //var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
             var t = compiledTemplate({beat: this.beatBoxController.currentBeat});
             this.$el.html(t);
+            this.setSelectedBarSound(this.beatBoxController.currentBeat.get("bars"));
             return this;
         },
 
@@ -174,7 +175,23 @@ define([
             } else if (classLst.contains("16")) {
                 return 16;
             } else return 0;
+        },
+
+        // Function zum Hinzufügen des Attributs selected ensprechenden option-Elementen,
+        // die ausgewählten Sounds darstellen
+        setSelectedBarSound: function (bars) {
+            var i = 0;
+            var soundSelectElements = $('select.soundSelect');
+            bars.forEach(function (bar) {
+                var soundSelect = soundSelectElements[i];
+                var soundOption = $(soundSelect).find('option')[bar.sound];
+                $(soundOption).attr("selected", "selected");
+                i++;
+            });
+
         }
+
+
     });
     return MainView;
 });
