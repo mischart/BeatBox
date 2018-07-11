@@ -95,8 +95,6 @@
                     <option value="46">loading-chime</option>
                     <option value="47">laser-shot</option>
                 </optgroup>
-
-
             </select>
             <label for="<%= 'filter' + i %>">Filter:</label>
             <select size="1" class="filterSelect" id="<%= 'filter' + i %>">
@@ -104,6 +102,8 @@
                 <option value="filter2">filter2</option>
                 <option value="filter3">filter3</option>
             </select>
+            <input class="filterIn" id="<%= 'filterIn' + i %>" type="range" min="0" max="100" value="100"
+                   step="1">
         </div>
         <div class="volumeDiv">
             <label for="<%= 'volume' + i %>">Lautstärke </label>
