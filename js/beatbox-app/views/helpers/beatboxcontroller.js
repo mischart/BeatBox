@@ -140,11 +140,21 @@ define([
                     'sounds/others/385927__pol__s002-lap-complete-signal.wav', // author / user http://freesound.org/people/pol/
                     'sounds/others/398088__gamezger__quack.wav', // author / user http://freesound.org/people/gamezger/
                     'sounds/others/405546__raclure__loading-chime.wav', // author / user http://freesound.org/people/raclure/
-                    'sounds/others/414888__mattix__8bit-laser-shot-04.wav' // author / user http://freesound.org/people/mattix/
+                    'sounds/others/414888__mattix__8bit-laser-shot-04.wav', // author / user http://freesound.org/people/mattix/
+                    //effects (Sounds, die Impulsantworten bilden)
+                    'sounds/effects/room.mp3', // quelle: http://audiodesign.raffaseder.net/html/Kap2_6.htm
+                    'sounds/effects/cathedral.mp3', // quelle: http://audiodesign.raffaseder.net/html/Kap2_6.htm
+                    'sounds/effects/toilet.mp3', // quelle: http://audiodesign.raffaseder.net/html/Kap2_6.htm
+                    'sounds/effects/factoryHall.wav', // quelle: https://fokkie.home.xs4all.nl/IR.htm
+                    'sounds/effects/smallChurch.wav' // quelle: https://fokkie.home.xs4all.nl/IR.htm
+
+
 
                 ], function (bufferList) {
                     //geladene Sounds abspeichern
                     _this.soundBufferArray = bufferList;
+                    _this.initializeEffects();
+
                     // var bars = _this.currentBeat.get("bars");
                     //
                     // bars.forEach(function (bar) {
@@ -258,7 +268,7 @@ define([
         };
 
         // Funktion zur Initialisierung der Lautstärke der gesamten BeatBox Maschine
-        // sowie der einzelnen Takts
+        // sowie der einzelnen Takte
         this.initializeVolume = function () {
             var currentMainVolume = this.currentBeat.get("volume");
             this.gainNodeController.adjustMainVolume(currentMainVolume / 100);
@@ -269,11 +279,28 @@ define([
 
         };
 
+        // Funktion zur Initialisierung der Sound Effekte der einzelnen Takte
+        this.initializeEffects = function () {
+            var bars = this.currentBeat.get("bars");
+            for (var i = 0; i < bars.length; i++) {
+                var effectIndex = bars[i].effect;
+                this.gainNodeController.adjustEffect(i, this.soundBufferArray[effectIndex]);
+            }
+
+        };
+
         // Funktion zum Ändern des Sounds in einem Takt
         this.changeBarSound = function (barIndex, soundIndex) {
             var bars = this.currentBeat.get("bars");
             bars[barIndex].sound = soundIndex;
-        },
+        };
+
+        // Funktion zum Ändern des Effekts in einem Takt
+        this.changeBarEffect = function (barIndex, impulseResponseIndex) {
+            var bars = this.currentBeat.get("bars");
+            bars[barIndex].effect = impulseResponseIndex;
+            this.gainNodeController.adjustEffect(barIndex, this.soundBufferArray[impulseResponseIndex]);
+        };
 
         this.adjustTempo = function (tempo) {
             this.currentBeat.set("tempo", tempo);
