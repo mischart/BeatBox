@@ -43,7 +43,9 @@ define([
             'input .barVolume': 'changeBarVolume',
             'input #volumeIn': 'changeMainVolume',
             'input #tempoIn': 'changeTempo',
-            'change .soundSelect': 'changeSound'
+            'change .soundSelect': 'changeSound',
+            'input .effectSelect': 'changeEffect',
+
 
 
         },
@@ -55,6 +57,7 @@ define([
             var t = compiledTemplate({beat: this.beatBoxController.currentBeat});
             this.$el.html(t);
             this.setSelectedBarSound(this.beatBoxController.currentBeat.get("bars"));
+            this.setSelectedEffect(this.beatBoxController.currentBeat.get("bars"));
             return this;
         },
 
@@ -177,8 +180,8 @@ define([
             } else return 0;
         },
 
-        // Function zum Hinzufügen des Attributs selected ensprechenden option-Elementen,
-        // die ausgewählten Sounds darstellen
+        // Funktion zum Setzen des Attributs selected für entsprechende option-Elemente,
+        // die ausgewählten Sounds in den einzelnen Takten darstellen
         setSelectedBarSound: function (bars) {
             var i = 0;
             var soundSelectElements = $('select.soundSelect');
@@ -189,6 +192,31 @@ define([
                 i++;
             });
 
+        },
+
+        // Funktion zum Setzen des Attributs selected für entsprechende option-Elemente,
+        // die ausgewählten Effekte in den einzelnen Takten darstellen
+        setSelectedEffect: function (bars) {
+            var i = 0;
+            var effectSelectElements = $('select.effectSelect');
+            bars.forEach(function (bar) {
+                var effectSelect = effectSelectElements[i];
+                var effectOptions = $(effectSelect).find('option');
+                for (var j = 0; j < effectOptions.length; j++) {
+                    if (effectOptions[j].getAttribute('value') == bar.effect) {
+                        $(effectOptions[j]).attr("selected", "selected");
+                    }
+                }
+                i++;
+            });
+        },
+
+        // Eventhandler zum Ändern der Effekte
+        changeEffect: function (e) {
+            var effectSelectId = e.target.id;
+            var barIndex = effectSelectId.replace('effect', '');
+            var impulseResponseIndex = e.target.options[e.target.selectedIndex].value;
+            this.beatBoxController.changeBarEffect(barIndex, impulseResponseIndex);
         }
 
 
