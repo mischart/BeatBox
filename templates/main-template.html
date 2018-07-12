@@ -34,7 +34,7 @@
 <% _.each(beat.get('bars'), function(bar) { %>
 <div id="<%= i%>">
     <div class="barSetupDiv">
-        <div class="soundFilterDiv">
+        <div class="soundEffectVolumeDiv">
             <% var m = 0;%>
             <label for="<%= 'sound' + i %>">Sound:</label>
             <select size="1" class="soundSelect" id="<%= 'sound' + i %>">
@@ -145,6 +145,8 @@
                     <% m++;%>
                 </optgroup>
             </select>
+        </div>
+        <div class="soundEffectVolumeDiv">
             <label for="<%= 'effect' + i %>">Effect:</label>
             <select size="1" class="effectSelect" id="<%= 'effect' + i %>">
                 <option value="<%= m %>">room</option>
@@ -158,11 +160,13 @@
                 <option value="<%= m %>">small church</option>
                 <% m++;%>
             </select>
+
+
             <input class="effectIn" id="<%= 'effectIn' + i %>" type="range" min="0" max="100"
                    value="<%= bar.effectLevel %>"
                    step="1">
         </div>
-        <div class="volumeDiv">
+        <div class="soundEffectVolumeDiv">
             <label for="<%= 'volume' + i %>">Lautstärke </label>
             <input class="barVolume" id="<%= 'volume' + i %>" type="range" min="0" max="100" value="<%= bar.volume %>"
                    step="1">
