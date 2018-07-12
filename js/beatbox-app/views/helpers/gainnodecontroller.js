@@ -85,10 +85,16 @@ define([
             this.mainGainNode.gain.value = volumeValue;
         };
 
-        this.adjustEffect = function (barIndex, convolutionSound) {
-            // var convolutionSoundSource = Utils.audioContext.createBufferSource();
-            // convolutionSoundSource.buffer = convolutionSound;
-            this.convolvers[barIndex].buffer = convolutionSound;
+        // Funktion zur Einstellung des Effekts und Effektpegels in dem Takt mit der Nummer barIndex
+        this.adjustEffect = function (barIndex, impulseResponseSound, effectLevel) {
+            if (barIndex != null && impulseResponseSound != null) {
+                this.convolvers[barIndex].buffer = impulseResponseSound;
+            }
+
+            if (barIndex != null && effectLevel != null) {
+                this.convolverGains[barIndex].gain.value = effectLevel;
+            }
+
         };
 
         this.init(numberOfBars);

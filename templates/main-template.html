@@ -158,7 +158,8 @@
                 <option value="<%= m %>">small church</option>
                 <% m++;%>
             </select>
-            <input class="effectIn" id="<%= 'effectIn' + i %>" type="range" min="0" max="100" value="100"
+            <input class="effectIn" id="<%= 'effectIn' + i %>" type="range" min="0" max="100"
+                   value="<%= bar.effectLevel %>"
                    step="1">
         </div>
         <div class="volumeDiv">

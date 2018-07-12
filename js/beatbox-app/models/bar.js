@@ -4,6 +4,7 @@ define([], function () {
         this.notes.fill(false);
         this.sound = 0;
         this.effect = 48;
+        this.effectLevel = 0;
         this.volume = 100;
     }
 

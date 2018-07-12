@@ -45,6 +45,7 @@ define([
             'input #tempoIn': 'changeTempo',
             'change .soundSelect': 'changeSound',
             'input .effectSelect': 'changeEffect',
+            'input .effectIn': 'changeEffectLevel'
 
 
 
@@ -217,8 +218,15 @@ define([
             var barIndex = effectSelectId.replace('effect', '');
             var impulseResponseIndex = e.target.options[e.target.selectedIndex].value;
             this.beatBoxController.changeBarEffect(barIndex, impulseResponseIndex);
-        }
+        },
 
+        // Eventhandler zum Ändern des Effektpegels
+        changeEffectLevel: function (e) {
+            var effectInId = e.target.id;
+            var barIndex = effectInId.replace('effectIn', '');
+            var value = parseInt(e.target.value);
+            this.beatBoxController.changeBarEffectLevel(barIndex, value);
+        },
 
     });
     return MainView;

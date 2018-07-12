@@ -240,7 +240,6 @@ define([
 
         // Funktion zum Setzen oder Entfernen der Note mit der Nummer noteNumber
         // im Takt mit der Nummer barNumber
-
         this.toggleNote = function (barNumber, noteNumber) {
             var bar = this.currentBeat.get("bars")[parseInt(barNumber)];
             bar.notes[noteNumber - 1] = !(bar.notes[noteNumber - 1]);
@@ -284,7 +283,8 @@ define([
             var bars = this.currentBeat.get("bars");
             for (var i = 0; i < bars.length; i++) {
                 var effectIndex = bars[i].effect;
-                this.gainNodeController.adjustEffect(i, this.soundBufferArray[effectIndex]);
+                var effectLevel = bars[i].effectLevel;
+                this.gainNodeController.adjustEffect(i, this.soundBufferArray[effectIndex], effectLevel / 100);
             }
 
         };
@@ -296,12 +296,20 @@ define([
         };
 
         // Funktion zum Ändern des Effekts in einem Takt
-        this.changeBarEffect = function (barIndex, impulseResponseIndex) {
+        this.changeBarEffect = function (barIndex, effectIndex) {
             var bars = this.currentBeat.get("bars");
-            bars[barIndex].effect = impulseResponseIndex;
-            this.gainNodeController.adjustEffect(barIndex, this.soundBufferArray[impulseResponseIndex]);
+            bars[barIndex].effect = effectIndex;
+            this.gainNodeController.adjustEffect(barIndex, this.soundBufferArray[effectIndex], null);
         };
 
+        // Funktion zum Ändern des Effektpegels in einem Takt
+        this.changeBarEffectLevel = function (barIndex, effectLevel) {
+            var bars = this.currentBeat.get("bars");
+            bars[barIndex].effectLevel = effectLevel;
+            this.gainNodeController.adjustEffect(barIndex, null, effectLevel / 100);
+        },
+
+            // Funktion zur Einstellung des Beattempos
         this.adjustTempo = function (tempo) {
             this.currentBeat.set("tempo", tempo);
         };
