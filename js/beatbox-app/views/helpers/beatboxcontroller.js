@@ -11,7 +11,7 @@ define([
     'app/views/helpers/utils',
     'app/views/helpers/gainnodecontroller'
 ], function ($, Beat, BufferLoader, Utils, GainNodeController) {
-    function BeatBoxController(beats) {
+    function BeatBoxController(beats, beatID) {
         // Beats des Users
         this.beats = beats;
         // der aktuelle Beat des Users
@@ -65,12 +65,16 @@ define([
         };
 
         // Funtkion zum Setzen des aktuellen Beats
-        this.setCurrentBeat = function () {
-            if (this.beats.length > 0) {
-                this.currentBeat = this.beats.last();
+        this.setCurrentBeat = function (beatID) {
+            if (beatID != null) {
+                this.currentBeat = this.beats.get(beatID);
             } else {
-                this.currentBeat = new Beat();
-                this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
+                if (this.beats.length > 0) {
+                    this.currentBeat = this.beats.last();
+                } else {
+                    this.currentBeat = new Beat();
+                    this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
+                }
             }
         };
 
@@ -232,7 +236,7 @@ define([
             this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
         };
 
-        this.setCurrentBeat();
+        this.setCurrentBeat(beatID);
         // this.init();
     }
 

@@ -26,7 +26,7 @@ define([
 
             beats.fetch({
                 success: function () {
-                    _this.beatBoxController = new BeatBoxController(beats);
+                    _this.beatBoxController = new BeatBoxController(beats, _this.options.beatID);
                     _this.render();
                     _this.loadSoundData();
                 }
@@ -47,7 +47,9 @@ define([
             'change .soundSelect': 'changeSound',
             'input .effectSelect': 'changeEffect',
             'input .effectIn': 'changeEffectLevel',
-            'click #addButton': 'addNewBeat'
+            'click #addButton': 'addNewBeat',
+            'input #beatSelect': 'selectBeat',
+
 
         },
 
@@ -55,10 +57,13 @@ define([
         render: function () {
             var compiledTemplate = _.template(template);      //template is the loaded HTML template
             //var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
-            var t = compiledTemplate({beat: this.beatBoxController.currentBeat});
+            var t = compiledTemplate({beat: this.beatBoxController.currentBeat, beats: this.beatBoxController.beats});
             this.$el.html(t);
             this.setSelectedBarSound(this.beatBoxController.currentBeat.get("bars"));
             this.setSelectedEffect(this.beatBoxController.currentBeat.get("bars"));
+            if (this.beatBoxController.currentBeat.id != null) {
+                this.setSelectedBeat(this.beatBoxController.currentBeat.id);
+            }
             return this;
         },
 
@@ -89,10 +94,10 @@ define([
             var _this = this;
             this.beatBoxController.currentBeat.destroy({
                 success: function () {
-                    // TODO
                     // _this.options.router.navigate('', {trigger: true});
-                    Backbone.history.stop();
-                    Backbone.history.start();
+                    // Backbone.history.stop();
+                    // Backbone.history.start();
+                    _this.options.router.main(null);
 
                 }
             });
@@ -215,6 +220,19 @@ define([
             });
         },
 
+        // Funktion zum Setzen des Attributs selected für das entsprechende option-Element,
+        // das das aktuelle Beat darstellt
+        setSelectedBeat: function (beatId) {
+            var beatSel = $('#beatSelect option');
+
+            for (var i = 0; i < beatSel.length; i++) {
+                if (beatSel[i].value == beatId) {
+                    beatSel[i].setAttribute("selected", "selected");
+                    break;
+                }
+            }
+        },
+
         // Eventhandler zum Ändern der Effekte
         changeEffect: function (e) {
             var effectSelectId = e.target.id;
@@ -235,7 +253,14 @@ define([
             this.stop();
             this.beatBoxController.createNewBeat();
             this.beatBoxController.currentBeat.save();
-            this.options.router.main();
+            this.options.router.main(null);
+        },
+
+        // Funktion zur Auswahl und Anzeige eines der gespeicherten Beats im Select-Element
+        selectBeat: function (e) {
+            this.stop();
+            var beatID = e.target.options[e.target.selectedIndex].value;
+            this.options.router.main(beatID);
         },
 
         // Funktion zum Laden der Sound-Daten
@@ -313,15 +338,6 @@ define([
                     _this.beatBoxController.init();
                     _this.enableButtons();
 
-
-                    // var bars = _this.currentBeat.get("bars");
-                    //
-                    // bars.forEach(function (bar) {
-                    //     bar.sound = _this.soundBufferArray[0];
-                    // });
-
-                    // Bar.prototype.sound = soundBufferArray[0];
-                    // bars[2].sound = soundBufferArray[1];
                 }
             );
 

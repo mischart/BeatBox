@@ -11,10 +11,10 @@ define([
             '': 'main'
         },
 
-        main: function () {
+        main: function (beatID) {
             if (mainView) mainView.kill();
-            mainView = new MainView({router: this});
-        },
+            mainView = new MainView({router: this, beatID: beatID});
+        }
     });
 
     var init = function () {
@@ -23,7 +23,7 @@ define([
         router.on('route:main', function (page) {
             console.log('Backbone routed to MainView - template');
             if (mainView) mainView.kill();
-            mainView = new MainView({router: router});
+            mainView = new MainView({router: router, beatID: null});
         });
         Backbone.history.start();
     };

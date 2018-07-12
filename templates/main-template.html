@@ -8,6 +8,14 @@
     <button id="saveButton" disabled class="btn"><i class="fas fa-save"></i></button>
     <button id="deleteButton" disabled class="btn"><i class="fas fa-trash-alt"></i></button>
     <button id="addButton" disabled class="btn"><i class="fas fa-plus"></i></button>
+    <div class="beatsSelDiv">
+        <label for="beatSelect">Beat auswählen:</label>
+        <select size="1" id="beatSelect">
+            <% beats.each(function(beat) { %>
+            <option value="<%= beat.id %>"><%= beat.id %></option>
+            <% }); %>
+        </select>
+    </div>
 </div>
 <div>
     <div>
@@ -101,10 +109,10 @@
                     <option value="<%= m %>">bass8</option>
                     <% m++;%>
                     <option value="<%= m %>">bass9</option>
-                    <% m++;%>
+                    <% m++;%>"<%= m %>"
                 </optgroup>
                 <optgroup label="others">
-                    <option value="<%= m %>">big-bass-c2</option>
+                    <option value=>big-bass-c2</option>
                     <% m++;%>
                     <option value="<%= m %>">bsoft2</option>
                     <% m++;%>
