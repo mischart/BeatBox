@@ -300,6 +300,7 @@ define([
                     //geladene Sounds abspeichern
                     _this.beatBoxController.soundBufferArray = bufferList;
                     _this.beatBoxController.init();
+                    _this.enableButtons();
 
 
                     // var bars = _this.currentBeat.get("bars");
@@ -316,7 +317,16 @@ define([
             //Sound-Daten laden
             bufferLoader.load();
 
+        },
+
+        // Funktion zur Aktivierung von Buttons. Sie wird aufgerufen, nachdem Sound-Daten geladen wurden
+        enableButtons: function () {
+            $(playButton).removeAttr('disabled');
+            $(stopButton).removeAttr('disabled');
+            $(saveButton).removeAttr('disabled');
+            $(deleteButton).removeAttr('disabled');
         }
+
 
     });
     return MainView;
