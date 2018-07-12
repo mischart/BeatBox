@@ -9,7 +9,12 @@ define([
     var Router = Backbone.Router.extend({
         routes: {
             '': 'main'
-        }
+        },
+
+        main: function () {
+            if (mainView) mainView.kill();
+            mainView = new MainView({router: this});
+        },
     });
 
     var init = function () {

@@ -46,7 +46,8 @@ define([
             'input #tempoIn': 'changeTempo',
             'change .soundSelect': 'changeSound',
             'input .effectSelect': 'changeEffect',
-            'input .effectIn': 'changeEffectLevel'
+            'input .effectIn': 'changeEffectLevel',
+            'click #addButton': 'addNewBeat'
 
         },
 
@@ -89,7 +90,10 @@ define([
             this.beatBoxController.currentBeat.destroy({
                 success: function () {
                     // TODO
-                    _this.options.router.navigate('', {trigger: true});
+                    // _this.options.router.navigate('', {trigger: true});
+                    Backbone.history.stop();
+                    Backbone.history.start();
+
                 }
             });
 
@@ -227,6 +231,13 @@ define([
             this.beatBoxController.changeBarEffectLevel(barIndex, value);
         },
 
+        addNewBeat: function () {
+            this.stop();
+            this.beatBoxController.createNewBeat();
+            this.beatBoxController.currentBeat.save();
+            this.options.router.main();
+        },
+
         // Funktion zum Laden der Sound-Daten
         loadSoundData: function () {
             var _this = this;
@@ -325,6 +336,7 @@ define([
             $(stopButton).removeAttr('disabled');
             $(saveButton).removeAttr('disabled');
             $(deleteButton).removeAttr('disabled');
+            $(addButton).removeAttr('disabled');
         }
 
 

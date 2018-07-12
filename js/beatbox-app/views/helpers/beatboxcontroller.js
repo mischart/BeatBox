@@ -70,6 +70,7 @@ define([
                 this.currentBeat = this.beats.last();
             } else {
                 this.currentBeat = new Beat();
+                this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
             }
         };
 
@@ -223,6 +224,12 @@ define([
             // Funktion zur Einstellung des Beattempos
         this.adjustTempo = function (tempo) {
             this.currentBeat.set("tempo", tempo);
+        };
+
+        // Funktion zur Erstellung eines neuen Beats
+        this.createNewBeat = function () {
+            this.currentBeat = new Beat();
+            this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
         };
 
         this.setCurrentBeat();
