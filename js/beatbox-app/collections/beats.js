@@ -1,3 +1,9 @@
+/**
+ * Collection von Beats
+ *
+ * @module beats.js
+ */
+
 define([
     'underscore',
     'backbone',

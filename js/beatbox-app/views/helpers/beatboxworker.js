@@ -1,3 +1,7 @@
+// beatboxworker zum regelmäßigen Abfeuern von Zeitereignissen
+// basierend auf den Quellen: https://www.html5rocks.com/en/tutorials/audio/scheduling/
+// https://github.com/cwilso/metronome/blob/master/js/metronomeworker.js
+
 var timerID = null;
 var interval = 100;
 

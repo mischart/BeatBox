@@ -1,3 +1,10 @@
+/**
+ * BufferLoader zum Laden von Sound-Daten
+ * Quelle: https://www.html5rocks.com/en/tutorials/webaudio/intro/js/buffer-loader.js
+ *
+ * @module bufferloader.js
+ */
+
 define([], function () {
     function BufferLoader(context, urlList, callback) {
         this.context = context;

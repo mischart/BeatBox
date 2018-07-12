@@ -1,4 +1,8 @@
-// Klasse Utils mit globalen Variablen als Singeltone definieren
+/**
+ * Modul utils mit globalen Variablen als Singeltone
+ *
+ * @module utils.js
+ */
 
 define([], function () {
     var instance = null;

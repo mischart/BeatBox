@@ -12,7 +12,7 @@ define([
     'app/views/helpers/gainnodecontroller'
 ], function ($, Beat, BufferLoader, Utils, GainNodeController) {
     function BeatBoxController(beats, beatID) {
-        // Beats des Users
+        // gespeichterte Beats des Users
         this.beats = beats;
         // der aktuelle Beat des Users
         this.currentBeat = null;
@@ -24,7 +24,7 @@ define([
         this.current16thNote;
         // Zeit in Millisekunden, nach deren Ablauf die Funktion scheduler() wiederholend ausgeführt wird
         this.lookahead = 25.0;
-        // Pufferzeit, die in der Funktion scheduler() zur Prüfung,ob die nächste Sechzehntelnote
+        // Pufferzeit, die in der Funktion scheduler() zur Prüfung, ob die nächste Sechzehntelnote
         // abzuspielen ist, verwendet wird
         this.scheduleAheadTime = 0.1;
         // Zeitpunkt des Abspielens der nächsten Sechzehntelnote
@@ -36,7 +36,6 @@ define([
         // Controller zum Verwalten der Lautstärke und Filter
         this.gainNodeController = null;
 
-
         // Funktion zum Abspielen des Beats
         this.playBeat = function () {
             this.isPlaying = !this.isPlaying;
@@ -44,12 +43,13 @@ define([
             if (this.isPlaying) {
                 // Setzen der aktuellen Sechzehntelnote auf 0
                 this.current16thNote = 0;
+                // Zeitpunkt der nächsten Sechzehntelnote
                 this.nextNoteTime = Utils.audioContext.currentTime;
+                // start Message senden
                 this.timerWorker.postMessage("start");
-                return "stop";
             } else {
+                // stop Message senden
                 this.timerWorker.postMessage("stop");
-                return "play";
             }
         };
 
@@ -66,12 +66,16 @@ define([
 
         // Funtkion zum Setzen des aktuellen Beats
         this.setCurrentBeat = function (beatID) {
+            // falls eine BeatID vorhanden ist
             if (beatID != null) {
                 this.currentBeat = this.beats.get(beatID);
-            } else {
+            } else { // falls keine BeatID vorhanden ist (z.B. wenn die Collection keine Beats enthält
+                // oder die Anwendung gerade gestartet wurde)
                 if (this.beats.length > 0) {
+                    // der letzte Beat der Collection der Variablen currentBeat zuweisen
                     this.currentBeat = this.beats.last();
                 } else {
+                    // einen neuen Beat initialisieren, falls die Collection leer ist
                     this.currentBeat = new Beat();
                     this.currentBeat.set("bars", this.currentBeat.createDefaultBarSet());
                 }
@@ -80,25 +84,33 @@ define([
 
         // Funktion, zur Initialisierung des BeatBoxControllers
         this.init = function () {
+            // Initialisierung von gainNodeController, der zum Abspielen von Sound-Daten und
+            // zur Einstellung von Effekte und Laustärke dient
             this.gainNodeController = new GainNodeController(this.currentBeat.get("bars").length);
+            // Laustärke initialisieren
             this.initializeVolume();
+            // Effekte initialisieren
             this.initializeEffects();
             var _this = this;
 
-            // Web Worker initialisieren
+            // Web Worker zum Empfang von regelmäßigen Zeitereignissen initialisieren
+            // basierend auf den Quellen: https://www.html5rocks.com/en/tutorials/audio/scheduling/
+            // https://github.com/cwilso/metronome/blob/master/js/metronomeworker.js
             this.timerWorker = new Worker("js/beatbox-app/views/helpers/beatboxworker.js");
 
-            // Event Handler setzen
+            // Event Handler zum Empfang von regelmäßigen Zeitereignissen setzen
             this.timerWorker.onmessage = function (e) {
                 if (e.data == "tick") {
                     console.log("tick!");
-                    // nach einem jedem Schlag des timeWorkers die Funktion scheduler() aufrufen()
+                    // nach einem jedem Empfang des Zeitereignisses die Funktion scheduler() aufrufen()
                     _this.scheduler();
                 }
                 else
                     console.log("message: " + e.data);
             };
 
+            // den Wert der Variablen lookahead senden
+            // (nach jedem Ablauf von lookahead feuert der beatboxworker ein Zeitereignis ab)
             this.timerWorker.postMessage({"interval": this.lookahead});
         };
 
@@ -114,7 +126,8 @@ define([
         };
 
         // Prüfen, in welchen Takten die aktuelle Sechzehntelnote gesetzt ist
-        // und anschließend die gesetzten Sounds abspielen
+        // und anschließend die gesetzten Sounds an gainNodeController übergeben
+        // der die übergebenen Sound-Daten abspielt
         this.scheduleNote = function (beatNumber, time) {
             var _this = this;
             var notesToPlay = new Array(this.currentBeat.get("bars").length);
@@ -125,7 +138,6 @@ define([
                     notesToPlay[i] = ({
                         sound: _this.soundBufferArray[bar.sound]
                     });
-                    // _this.playSound(bar.sound);
                     playing = true;
                 }
                 i++;
@@ -146,13 +158,6 @@ define([
             }
         };
 
-        // Funktion zum Abspielen eines Sounds
-        this.playSound = function (buffer) {
-            var source = Utils.audioContext.createBufferSource();
-            source.buffer = buffer;
-            source.connect(Utils.audioContext.destination);
-            source.start();
-        };
 
         // Funktion zum Setzen oder Entfernen der Note mit der Nummer noteNumber
         // im Takt mit der Nummer barNumber
@@ -225,7 +230,7 @@ define([
             this.gainNodeController.adjustEffect(barIndex, null, effectLevel / 100);
         };
 
-            // Funktion zur Einstellung des Beattempos
+        // Funktion zur Einstellung des Beattempos
         this.adjustTempo = function (tempo) {
             this.currentBeat.set("tempo", tempo);
         };
@@ -237,7 +242,6 @@ define([
         };
 
         this.setCurrentBeat(beatID);
-        // this.init();
     }
 
     return BeatBoxController;

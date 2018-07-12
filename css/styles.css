@@ -1,11 +1,3 @@
-/*Gängige Auflösungen in px:
-Smartphone - 320x480
-Tablet, klein - 800x600
-Tablet, groß oder Notebook, klein - 1024x768
-Notebook 16:9 - 1280x800
- */
-
-
 body {
     width: 1020px;
     height: 740px;
@@ -28,10 +20,6 @@ input[type=range] {
     width: 100px;
 }
 
-.beatBtn {
-    /*display: inline-block;*/
-
-}
 
 #barOneDiv, #setupDiv {
     width: 990px;

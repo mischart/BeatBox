@@ -48,7 +48,7 @@ define([
             'input .effectSelect': 'changeEffect',
             'input .effectIn': 'changeEffectLevel',
             'click #addButton': 'addNewBeat',
-            'input #beatSelect': 'selectBeat',
+            'input #beatSelect': 'selectBeat'
 
 
         },
@@ -56,7 +56,6 @@ define([
         // Funktion zum Rendern der mainView
         render: function () {
             var compiledTemplate = _.template(template);      //template is the loaded HTML template
-            //var t = compiledTemplate({bars: this.beatBoxController.currentBeat.get("bars")});
             var t = compiledTemplate({beat: this.beatBoxController.currentBeat, beats: this.beatBoxController.beats});
             this.$el.html(t);
             this.setSelectedBarSound(this.beatBoxController.currentBeat.get("bars"));
