@@ -1,13 +1,19 @@
 <div id="setupDiv">
-    <label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"
-                                                value="<%= beat.get('tempo') %>"/>
-    <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100"
-                                                    value="<%= beat.get('volume') %>" step="1">
-    <button id="playButton" disabled class="btn"><i class="fas fa-play"></i></button>
-    <button id="stopButton" disabled class="btn"><i class="fas fa-stop"></i></button>
-    <button id="saveButton" disabled class="btn"><i class="fas fa-save"></i></button>
-    <button id="deleteButton" disabled class="btn"><i class="fas fa-trash-alt"></i></button>
-    <button id="addButton" disabled class="btn"><i class="fas fa-plus"></i></button>
+    <div class="mainMenuDiv">
+        <label for="tempoIn">Tempo: </label> <input id="tempoIn" type="number" min="40" max="160"
+                                                    value="<%= beat.get('tempo') %>"/>
+    </div>
+    <div class="mainMenuDiv">
+        <label for="volumeIn">Lautstärke</label> <input id="volumeIn" type="range" min="0" max="100"
+                                                        value="<%= beat.get('volume') %>" step="1">
+    </div>
+    <div class="mainMenuDiv">
+        <button id="playButton" disabled class="btn"><i class="fas fa-play"></i></button>
+        <button id="stopButton" disabled class="btn"><i class="fas fa-stop"></i></button>
+        <button id="saveButton" disabled class="btn"><i class="fas fa-save"></i></button>
+        <button id="deleteButton" disabled class="btn"><i class="fas fa-trash-alt"></i></button>
+        <button id="addButton" disabled class="btn"><i class="fas fa-plus"></i></button>
+    </div>
     <div class="beatsSelDiv">
         <label for="beatSelect">Beat auswählen:</label>
         <select size="1" id="beatSelect">
@@ -169,8 +175,6 @@
                 <option value="<%= m %>">small church</option>
                 <% m++;%>
             </select>
-
-
             <input class="effectIn" id="<%= 'effectIn' + i %>" type="range" min="0" max="100"
                    value="<%= bar.effectLevel %>"
                    step="1">
