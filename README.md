@@ -2,7 +2,6 @@
 
 ## Projektbeschreibung
 Eine Webanwendung zur Erstellung von Beats, die im Rahmen der Lehrveranstaltung  „Rich-Media-Anwendungen” umgesetzt wurde.
-[Link zur lauffähigen Anwendung](http://hultaaj.bplaced.net/BeatBox/)
 
 ## Technologien
 HTML, JavaScript, Framework Backbone, Web Audio API
